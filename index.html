@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Hidratação</title>
+    <script>
+        function calcularAgua() {
+            const altura = parseFloat(document.getElementById('altura').value);
+            const peso = parseFloat(document.getElementById('peso').value);
+            const foco = document.getElementById('foco').value;
+
+            if (isNaN(altura) || isNaN(peso)) {
+                alert('Por favor, insira valores válidos para altura e peso.');
+                return;
+            }
+
+            let aguaBase = peso * 35; // Valor base em ml (35 ml por kg)
+            
+            switch (foco) {
+                case 'emagrecimento':
+                    aguaBase *= 1.2;
+                    break;
+                case 'energia':
+                    aguaBase *= 1.15;
+                    break;
+                case 'dor-de-cabeca':
+                    aguaBase *= 1.1;
+                    break;
+            }
+
+            const aguaLitros = (aguaBase / 1000).toFixed(2);
+            document.getElementById('resultado').innerText = `Você deve beber aproximadamente ${aguaLitros} litros de água por dia.`;
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo da Empresa" class="logo">
+        <h1>Calculadora de Hidratação</h1>
+        <p class="info">Esta calculadora ajuda você a descobrir a quantidade ideal de água que deve beber diariamente com base no seu peso, altura e objetivo de saúde. O consumo de água alcalina pode melhorar sua energia, reduzir dores de cabeça e ajudar em objetivos como emagrecimento.</p>
+
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" placeholder="Ex.: 170">
+
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ex.: 70">
+
+        <label for="foco">Qual é o seu foco?</label>
+        <select id="foco">
+            <option value="minimo">Hidratação mínima</option>
+            <option value="emagrecimento">Emagrecimento</option>
+            <option value="energia">Ganho de energia e produtividade</option>
+            <option value="dor-de-cabeca">Reduzir dores de cabeça</option>
+        </select>
+
+        <button onclick="calcularAgua()">Calcular</button>
+
+        <div id="resultado"></div>
+    </div>
+</body>
+</html>
